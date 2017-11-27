@@ -1,0 +1,85 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.21.6'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 25
+    defaultConfig {
+        applicationId "com.gdo.naviopengl"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    def appCompatVersion = '25.3.0'
+    //di
+    def butterknifeVersion = '8.4.0'
+    def dagger2Version = '2.6.1'
+    def javaxAnnotationVersion = '10.0-b28'
+
+    //network
+    def retrofit2Version = '2.2.0'
+    def okHttp3Version = '3.6.0'
+
+    //rx
+    def rxAndroidVersion = '1.2.1'
+    def rxBindingsVersion = '0.4.0'
+    def rxJavaAsyncUtilVersion = '0.21.0'
+
+    compile("com.android.support:support-v4:$appCompatVersion") {
+        force = true
+    }
+
+    compile "com.android.support:appcompat-v7:$appCompatVersion"
+    compile "com.android.support.constraint:constraint-layout:1.0.2"
+
+    //network
+    compile "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit2Version"
+    compile "com.squareup.okhttp3:logging-interceptor:$okHttp3Version"
+
+    //di
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    compile "com.google.dagger:dagger:$dagger2Version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger2Version"
+
+    provided "org.glassfish:javax.annotation:$javaxAnnotationVersion"
+
+    //java8 streams backport
+    compile "com.annimon:stream:1.1.0"
+
+    //rx
+    compile "io.reactivex:rxandroid:$rxAndroidVersion"
+    compile "com.jakewharton.rxbinding:rxbinding:$rxBindingsVersion"
+    compile "io.reactivex:rxjava-async-util:$rxJavaAsyncUtilVersion"
+
+}
