@@ -57,6 +57,7 @@ public class GDO_Scene {
 
     public void attachLight(GDO_Light light){
         this.light = light;
+        light.attachtoScene(this);
     }
 
     public GDO_Camera getCamera() {

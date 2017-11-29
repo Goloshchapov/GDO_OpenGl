@@ -20,7 +20,7 @@ public class GDO_Light extends GDO_Scene_BaseObject{
     public float[] getLightPosInEyeSpace() {
         Matrix.multiplyMV(gLightPosInWorldSpace, 0, gLightMatrix, 0, gLightPosInModelSpace, 0);
         Matrix.multiplyMV(glightPosInEyeSpace, 0, scene.getViewMatrix(), 0, gLightPosInWorldSpace, 0);
-        return gLightPosInWorldSpace;
+        return glightPosInEyeSpace;
     }
 
     public float[] getGlightPosInEyeSpace() {

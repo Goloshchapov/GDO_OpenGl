@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import com.gdo.naviopengl.scene_entity_objects.GDO_Camera;
+import com.gdo.naviopengl.scene_entity_objects.GDO_Light;
 import com.gdo.naviopengl.scene_entity_objects.GDO_Scene;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -31,9 +32,13 @@ public class NaviAddressRenderer implements GLSurfaceView.Renderer {
         glClearColor(0,0,1,1);
          gdoScene = new GDO_Scene();
         GDO_Camera camera = new GDO_Camera(gdoScene);
-        camera.initCamera(2,1,4,0,1,0);
-        GDO_Model testModel = new GDO_Model(context.getAssets(),"cube","vertex.glsl", "fshaderTex.glsl");
-        testModel.setDiffuseTexture(context, R.drawable.followme, GLES20.GL_NEAREST);
+        camera.initCamera(1,2,3,0,1,0);
+        GDO_Light light = new GDO_Light();
+        light.setLightPosition(0,0.5f,2);
+        gdoScene.attachLight(light);
+        GDO_Model testModel = new GDO_Model(context.getAssets(),"box.gdom","vertexP_N_UV.glsl", "fshaderTex.glsl");
+//        testModel.setDiffuseTexture(context, R.drawable.followme, GLES20.GL_NEAREST);
+        testModel.setColor(1.0f,0.0f,0.0f,1.0f);
         gdoScene.addModelToScene(testModel);
     }
 
